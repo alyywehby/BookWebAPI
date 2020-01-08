@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
-using webapi.Controller;
+using webapi.Services;
 using Microsoft.Extensions.Configuration;
 namespace webapi {
     public class Startup {
@@ -23,6 +23,7 @@ namespace webapi {
             services.AddDbContext<BookDbContext> (options =>
                 options.UseNpgsql ("Host=localhost;Database=BookApiProject;Username=postgres;Password=root"));
             services.AddMvc (option => option.EnableEndpointRouting = false);
+            services.AddScoped<ICountryRepository, CountryRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,7 +39,9 @@ namespace webapi {
             //         await context.Response.WriteAsync ("Hello World!");
             //     });
             // });
-            context.SeedDataContext();
+
+            //Seeding Data For The First Time
+            //context.SeedDataContext();
             app.UseMvc();
         }
     }

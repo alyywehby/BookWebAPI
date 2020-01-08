@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using webapi.Models;
-namespace webapi.Controller {
+namespace webapi.Services {
     public class BookDbContext : DbContext {
         public BookDbContext (DbContextOptions<BookDbContext> options) : base (options) {
             Database.Migrate ();
