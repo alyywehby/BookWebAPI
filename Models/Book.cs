@@ -1,0 +1,25 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System;
+using System.Collections.Generic;
+namespace webapi.Models {
+    public class Book {
+        [Key]
+        [DatabaseGenerated (DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+
+        [Required]
+        [StringLength(10, MinimumLength=3, ErrorMessage="ISBN must be between 3 and 10 chars")]
+        public string Isbn { get; set; }
+
+        [Required]
+        [MaxLength (200, ErrorMessage = "Title cannot be more than 200 chars")]
+        public string Title { get; set; }
+
+        //? after DateTime make it optional
+        public DateTime? DatePublished { get; set; }
+        public virtual ICollection<Review> Reviews { get; set; }
+        public virtual ICollection<BookAuthor> BookAuthors { get; set; }
+        public virtual ICollection<BookCategory> BookCategories { get; set; }
+    }
+}
